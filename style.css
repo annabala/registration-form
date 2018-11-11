@@ -3,9 +3,26 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color: #151B26;
     font-family: 'Roboto', 'Arial', sans-serif;
 }
-.container {
-    margin: 0 auto;
-    max-width: 800px;
+.form {
+    border: 5px solid #7899D4;
+    background-color: #F0EFF4;
+}
+label {
+   display: block;
+   margin-bottom: 4px;
+}
+input {
+    min-width: 100px;
+    min-height: 30px;
+    border: 1px solid #6F8695;
+}
+.btn-submit {
+    background-color: #7272AB;
+    padding: 8px 12px;
+    border: none;
+    margin: 20px 0;
+    color: #fff;
 }

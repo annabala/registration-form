@@ -1,3 +1,13 @@
+<?php
+        session_start();
+
+        //connect to database 
+        $db = mysqli_connect("project.local", "root", "", "authentication");
+
+
+
+?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -9,11 +19,11 @@
         <title>Register for the race</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/simple-grid/grid/simple-grid.css">
+        <link rel="stylesheet" href="simple-grid/simple-grid.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <section class="section-intro">
+        <section class="section-intro header">
             <div class="container">
                 <h1>Hello!</h1>
                 <h2>Register today!</h2>
@@ -21,14 +31,40 @@
         </section>
         <section class="section-registration-form">
             <div class="container">
-                <form action="" class="form">
+                <form method="post" action="index.php" class="form">
                     <div class="row">
+                        <div class="col-6">
+                            <label for="name">Imię</label>
+                            <input type="text" name="name" placeholder="Imię">
+                        </div>
+                        <div class="col-6">
+                            <label for="lastname">Nazwisko</label>
+                            <input type="text" name="lastname" placeholder="Nazwisko">
+                        </div>
+                        <div class="col-6">
+                            <label for="birthday">Data urodzenia</label>
+                            <input type="date" name="birthday">
+                        </div>
+                        <div class="col-6">
+                            <label for="city">Miasto</label>
+                            <input type="text" name="city" placeholder="Miasto">
+                        </div>
                         <div class="col-12">
-
+                            <label for="email">Email</label>
+                            <input type="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="col-6">
+                            <label for="password">Hasło (minimum 6 znaków)</label>
+                            <input type="password" name="password" placeholder="Hasło">
+                        </div>
+                        <div class="col-6">
+                            <label for="password2">Powtórz hasło</label>
+                            <input type="password" name="password" placeholder="Hasło">
+                        </div>
+                        <div class="col-12">
+                            <button class="btn-submit" type="submit">Zapisz się!</button>
                         </div>
                     </div>
-                    <label for="name">Imię</label>
-                    <input type="text" placeholder="Imię">
                 </form>
             </div>
         </section>

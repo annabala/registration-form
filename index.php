@@ -1,11 +1,40 @@
 <?php
         session_start();
-
+        
         //connect to database 
-        $db = mysqli_connect("project.local", "root", "", "authentication");
+        $db = mysqli_connect("localhost", "root", "", "authentication");
 
+        echo $db ? 'conected' : 'not conected';
 
+        if(isset($_POST['register_btn'])) {
+            // session_start();
 
+            $username = mysqli_real_escape_string($db, $_POST['username']);
+            $userlastname = mysqli_real_escape_string($db, $_POST['userlastname']);
+            $city = mysqli_real_escape_string($db, $_POST['city']);
+            $email = mysqli_real_escape_string($db, $_POST['email']);
+            $password = mysqli_real_escape_string($db, $_POST['password']);
+            $password2 = mysqli_real_escape_string($db, $_POST['password2']);
+
+            // if($password == $password2) {
+            //     //create user
+            //     $password = md5($password); //to secure password with hash
+                $sql = "INSERT INTO users(username, userlastname, city, email, password) VALUES('$username', '$userlastname', '$city', '$email', '$password')";
+                // mysqli_query($db, $sql);
+                if (!mysqli_query($db,$sql)) {
+                    die('Error: ' . mysqli_error($db));
+                  }
+                  echo "1 record added";
+                  
+                $_SESSION['message'] = "Jesteś zalogowany";
+                $_SESSION['username'] = $username;
+                header("location: home.php"); //redirect to home page
+            // } else {
+            //     //failed
+            //     $_SESSION['message'] = "Podane hasła nie są takie same, popraw i zapisz";
+            // }
+            mysqli_close($db);
+        }
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +45,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Register for the race</title>
+        <title>Zapisz się dziś!</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="simple-grid/simple-grid.css">
@@ -25,26 +54,26 @@
     <body>
         <section class="section-intro header">
             <div class="container">
-                <h1>Hello!</h1>
-                <h2>Register today!</h2>
+                <h1>Cześć!</h1>
+                <h2>Dopisz się do listy startowej!</h2>
             </div>
         </section>
         <section class="section-registration-form">
             <div class="container">
-                <form method="post" action="index.php" class="form">
+                <form method="post" action="" class="form">
                     <div class="row">
                         <div class="col-6">
-                            <label for="name">Imię</label>
-                            <input type="text" name="name" placeholder="Imię">
+                            <label for="username">Imię</label>
+                            <input type="text" name="username" placeholder="Imię">
                         </div>
                         <div class="col-6">
-                            <label for="lastname">Nazwisko</label>
-                            <input type="text" name="lastname" placeholder="Nazwisko">
+                            <label for="userlastname">Nazwisko</label>
+                            <input type="text" name="userlastname" placeholder="Nazwisko">
                         </div>
-                        <div class="col-6">
-                            <label for="birthday">Data urodzenia</label>
-                            <input type="date" name="birthday">
-                        </div>
+                        <!-- <div class="col-6">
+                            <label for="yearofbirth">Data urodzenia</label>
+                            <input type="date" name="yearofbirth">
+                        </div> -->
                         <div class="col-6">
                             <label for="city">Miasto</label>
                             <input type="text" name="city" placeholder="Miasto">
@@ -54,15 +83,15 @@
                             <input type="email" name="email" placeholder="Email">
                         </div>
                         <div class="col-6">
-                            <label for="password">Hasło (minimum 6 znaków)</label>
+                            <label for="password">Hasło</label>
                             <input type="password" name="password" placeholder="Hasło">
                         </div>
                         <div class="col-6">
                             <label for="password2">Powtórz hasło</label>
-                            <input type="password" name="password" placeholder="Hasło">
+                            <input type="password" name="password2" placeholder="Hasło">
                         </div>
                         <div class="col-12">
-                            <button class="btn-submit" type="submit">Zapisz się!</button>
+                            <input class="btn-submit" type="submit" name="register_btn" value="Zapisz się!">
                         </div>
                     </div>
                 </form>
@@ -72,6 +101,5 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
-        <script src="" async defer></script>
     </body>
 </html>

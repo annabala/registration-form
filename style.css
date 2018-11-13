@@ -6,6 +6,10 @@ body {
     color: #151B26;
     font-family: 'Roboto', 'Arial', sans-serif;
 }
+.new-user {
+    font-size: 2.5rem;
+    color: #7272AB;
+}
 .form {
     border: 5px solid #7899D4;
     background-color: #F0EFF4;

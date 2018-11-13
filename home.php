@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -15,8 +19,7 @@
     <body>
         <section class="section-intro header">
             <div class="container">
-                <h1>Cześć!</h1>
-                <h2>Witaj nowy użytkowniku!</h2>
+                <h1>Cześć <span class="new-user"> <?php echo $_SESSION['username'];  ?></span>!</h1>
             </div>
         </section>
         

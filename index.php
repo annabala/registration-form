@@ -16,23 +16,22 @@
             $password = mysqli_real_escape_string($db, $_POST['password']);
             $password2 = mysqli_real_escape_string($db, $_POST['password2']);
 
-            // if($password == $password2) {
+            if($password == $password2) {
             //     //create user
-            //     $password = md5($password); //to secure password with hash
+                $password = md5($password); //to secure password with hash
                 $sql = "INSERT INTO users(username, userlastname, city, email, password) VALUES('$username', '$userlastname', '$city', '$email', '$password')";
                 // mysqli_query($db, $sql);
                 if (!mysqli_query($db,$sql)) {
                     die('Error: ' . mysqli_error($db));
                   }
-                  echo "1 record added";
                   
                 $_SESSION['message'] = "Jesteś zalogowany";
                 $_SESSION['username'] = $username;
                 header("location: home.php"); //redirect to home page
-            // } else {
-            //     //failed
-            //     $_SESSION['message'] = "Podane hasła nie są takie same, popraw i zapisz";
-            // }
+            } else {
+                //failed
+                $_SESSION['message'] = "Podane hasła nie są takie same, popraw i zapisz";
+            }
             mysqli_close($db);
         }
 ?>
@@ -57,6 +56,12 @@
                 <h1>Cześć!</h1>
                 <h2>Dopisz się do listy startowej!</h2>
             </div>
+            <?php
+                if (isset($_SESSION['message'])) {
+                    echo "<div id='error_msg'>".$_SESSION['message']."</div>";
+                    unset($_SESSION['message']);
+                }
+            ?>
         </section>
         <section class="section-registration-form">
             <div class="container">
